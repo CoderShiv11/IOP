@@ -79,6 +79,48 @@ class IPOBase(BaseModel):
     debt_to_equity: Optional[float] = None
     current_gmp: float = 0.0
 
+    # Extended Financial Data
+    ebitda_cr: Optional[float] = None
+    ebitda_margin_pct: Optional[float] = None
+    pat_margin_pct: Optional[float] = None
+    pb_ratio: Optional[float] = None
+
+    # Revenue/Profit/EBITDA History (JSON strings)
+    revenue_history: Optional[str] = None
+    pat_history: Optional[str] = None
+    ebitda_history: Optional[str] = None
+
+    # Cash Flow
+    operating_cashflow_cr: Optional[float] = None
+    investing_cashflow_cr: Optional[float] = None
+    financing_cashflow_cr: Optional[float] = None
+
+    # Company Details
+    year_of_incorporation: Optional[int] = None
+    headquarters: Optional[str] = None
+    company_description: Optional[str] = None
+    business_model: Optional[str] = None
+    website: Optional[str] = None
+
+    # Promoter Info
+    promoter_holding_pct: Optional[float] = None
+    post_ipo_promoter_pct: Optional[float] = None
+    promoter_names: Optional[str] = None  # JSON string
+
+    # Industry & Competitive
+    market_position: Optional[str] = None
+    competitors: Optional[str] = None  # JSON string
+    total_addressable_market_cr: Optional[float] = None
+    market_share_pct: Optional[float] = None
+
+    # Strengths, Weaknesses, Risks (JSON strings)
+    strengths: Optional[str] = None
+    weaknesses: Optional[str] = None
+    risks: Optional[str] = None
+
+    # Objects of the Issue (JSON string)
+    objects_of_issue: Optional[str] = None
+
 
 class IPOCreate(IPOBase):
     pass

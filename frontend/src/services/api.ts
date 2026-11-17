@@ -2,6 +2,8 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import {
   IPO,
   IPODetail,
+  IPODetailExtended,
+  IPOEvaluation,
   NewsArticle,
   MarketSentimentOverview,
   TextSentimentAnalysisRequest,
@@ -223,6 +225,25 @@ export const api = {
 
   getIPODetail: async (id: number): Promise<IPODetail> => {
     const res = await apiClient.get<IPODetail>(`/ipos/${id}`);
+    return res.data;
+  },
+
+  // IPO Comparison — pass array of ids
+  compareIPOs: async (ids: number[]): Promise<IPODetailExtended[]> => {
+    const params = ids.map(id => `ids=${id}`).join('&');
+    const res = await apiClient.get<IPODetailExtended[]>(`/ipos/compare?${params}`);
+    return res.data;
+  },
+
+  // IPO Evaluation Score
+  getIPOEvaluation: async (id: number): Promise<IPOEvaluation> => {
+    const res = await apiClient.get<IPOEvaluation>(`/ipos/${id}/evaluation`);
+    return res.data;
+  },
+
+  // Detailed IPO (same endpoint, extended response type)
+  getIPODetailExtended: async (id: number): Promise<IPODetailExtended> => {
+    const res = await apiClient.get<IPODetailExtended>(`/ipos/${id}`);
     return res.data;
   },
 

@@ -73,6 +73,39 @@ export interface IPODetail extends IPO {
   gmp_history: GMPHistoryPoint[];
   created_at: string;
   updated_at: string;
+  // Extended Financial
+  ebitda_cr?: number;
+  ebitda_margin_pct?: number;
+  pat_margin_pct?: number;
+  pb_ratio?: number;
+  // History (JSON strings)
+  revenue_history?: string;
+  pat_history?: string;
+  ebitda_history?: string;
+  // Cash Flow
+  operating_cashflow_cr?: number;
+  investing_cashflow_cr?: number;
+  financing_cashflow_cr?: number;
+  // Company Details
+  year_of_incorporation?: number;
+  headquarters?: string;
+  company_description?: string;
+  business_model?: string;
+  website?: string;
+  // Promoter Info
+  promoter_holding_pct?: number;
+  post_ipo_promoter_pct?: number;
+  promoter_names?: string;
+  // Competitive
+  market_position?: string;
+  competitors?: string;
+  total_addressable_market_cr?: number;
+  market_share_pct?: number;
+  // SWOT
+  strengths?: string;
+  weaknesses?: string;
+  risks?: string;
+  objects_of_issue?: string;
 }
 
 export interface NewsArticle {
@@ -344,4 +377,64 @@ export interface DashboardStats {
     avg_gain_pct: number;
   }>;
   notifications: NotificationItem[];
+}
+
+// ==========================================
+// Extended IPO Analysis Types
+// ==========================================
+
+export interface FinancialDataPoint {
+  year: string;    // "FY22", "FY23", "FY24"
+  value: number;
+}
+
+export interface CompetitorInfo {
+  name: string;
+  market_cap_cr?: number;
+  pe_ratio?: number;
+  revenue_cr?: number;
+  description?: string;
+}
+
+export interface ObjectOfIssue {
+  purpose: string;
+  amount_cr: number;
+  percentage?: number;
+}
+
+export interface ScoreBreakdownItem {
+  factor: string;
+  points: number;
+  max_points: number;
+  detail: string;
+}
+
+export interface DimensionScore {
+  score: number;
+  max: number;
+  breakdown: ScoreBreakdownItem[];
+}
+
+export interface IPOEvaluationScores {
+  financial_health: DimensionScore;
+  valuation: DimensionScore;
+  growth: DimensionScore;
+  risk: DimensionScore;
+}
+
+export interface IPOEvaluation {
+  ipo_id: number;
+  company_name: string;
+  composite_score: number;
+  grade: string;
+  recommendation: string;
+  scores: IPOEvaluationScores;
+  summary: string;
+  key_positives: string[];
+  key_concerns: string[];
+}
+
+// Extended IPO detail with all new fields (superset of IPODetail)
+export interface IPODetailExtended extends IPODetail {
+  // (all extended fields already merged into IPODetail above)
 }
